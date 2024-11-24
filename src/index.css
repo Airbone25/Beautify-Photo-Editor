@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr auto;
+    grid-template-areas: 
+    "image sidebar"
+    "slider sidebar"
+    ;
+    height: 95vh;
+    width: 100vw;
+}
+
+nav{
+    height: 40px;
+    background-color: burlywood;
+    text-align: center;
+}
+
+.main-image{
+    grid-area: image;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://s3-eu-west-1.amazonaws.com/blog-ecotree/blog/0001/01/ad46dbb447cd0e9a6aeecd64cc2bd332b0cbcb79.jpeg');
+    background-position: top center;
+    background-size: contain;
+}
+
+.slider-container{
+    grid-area: slider;
+    margin-top: 2rem;
+    padding: 2rem;
+    display: grid;
+    place-items: center;
+}
+
+.sidebar-container{
+    background-color: burlywood;
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border-left: 2px solid rgb(85, 57, 21);
+    border-top: 2px solid rgb(85, 57, 21);
+}
+
+.item{
+    outline: 0;
+    border: 0;
+    width: 7rem;
+    padding: 10px;
+    background-color: burlywood;
+}
+
+.item:hover{
+    background-color: rgb(197, 139, 63);
+}
+
+.item.active{
+    background-color: rgb(197, 115, 8);
+}
