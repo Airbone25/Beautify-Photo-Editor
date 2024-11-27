@@ -1,7 +1,6 @@
-import Navbar from "./Navbar"
 import Slider from "./Slider"
 import SidebarItem from "./SidebarItem"
-import { useState } from "react"
+import React, { useRef, useState } from "react"
 
 function App() {
 
@@ -53,6 +52,10 @@ function App() {
   const [options,setOptions] = useState(DEFAULT_OPTIONS)
   const [optionsIndex,setOptionsIndex] = useState(0)
   const selectedOption = options[optionsIndex]
+  const [image,setImage] = useState(null)
+  const [imageUrl,setImageUrl] = useState(null)
+
+  const imageRef = useRef()
 
   function handleSliderChange({target}){
     setOptions(prevOptions=>{
@@ -70,11 +73,40 @@ function App() {
     return {filter: filters.join(' ')}
   }
 
+  function handleUpload(e){
+    const file = e.target.files[0]
+    if(file){
+      setImage(URL.createObjectURL(file))
+      setImageUrl(URL.createObjectURL(file))
+    }
+  }
+
+  function handleDownload(){
+    if(imageUrl){
+      const link = document.createElement('a')
+      link.href = imageUrl
+      link.download = 'edited.png'
+      link.click()
+    }
+  }
+
   return (
     <>
-      <Navbar/>
+      <nav>
+        <h1>Beautify</h1>
+        <label className="upload-btn">
+          Upload
+          <input type="file" accept="image/*" onChange={handleUpload}/>
+        </label>
+        <button className="download-btn" onClick={handleDownload}>
+          Download
+        </button>
+      </nav>
       <div className="container">
-        <div className="main-image" style={imageFilter()}/>
+        {/* <div className="main-image" style={imageFilter()}/> */}
+        <div className="main-image">
+        <img src={image} ref={imageRef} style={imageFilter()} className="image" alt="Upload Image"/>
+        </div>
         <div className="sidebar-container">
           {options.map((option,index)=>(
             <SidebarItem key={index} name={option.name} active={index == optionsIndex} handleClick={()=>setOptionsIndex(index)}/>
