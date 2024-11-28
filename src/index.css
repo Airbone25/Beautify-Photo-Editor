@@ -77,8 +77,8 @@ nav{
 
 .upload-btn{
     display: inline-block;
-    background-color: #d7b79d; /* Light barely wood color */
-    color: white;
+    background-color: #f79d53; 
+    color: black;
     font-size: 16px;
     padding: 10px 20px;
     border-radius: 5px;
@@ -87,10 +87,11 @@ nav{
     transition: background-color 0.3s ease;
     font-family: 'Arial', sans-serif;
     text-align: center;
+    margin-right: 10px;
 }
 
 .upload-btn:hover {
-    background-color: #c8a77d; 
+    background-color: rgb(197, 139, 63);
 }
 
 .upload-btn input{
@@ -99,8 +100,8 @@ nav{
 
 .download-btn{
     display: inline-block;
-    background-color: #d7b79d;
-    color: white;
+    background-color: #f79d53;
+    color: black;
     font-size: 16px;
     padding: 10px 20px;
     border: 0;
@@ -112,5 +113,5 @@ nav{
 }
 
 .download-btn:hover {
-    background-color: #c8a77d; 
+    background-color: rgb(197, 139, 63);
 }

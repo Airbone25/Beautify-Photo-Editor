@@ -82,30 +82,46 @@ function App() {
   }
 
   function handleDownload(){
-    if(imageUrl){
-      const link = document.createElement('a')
-      link.href = imageUrl
-      link.download = 'edited.png'
-      link.click()
+    if(!imageRef.current){
+      alert('No Image Uploaded')
+      return
     }
+
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    const img = imageRef.current
+
+    canvas.width = img.naturalWidth
+    canvas.height = img.naturalHeight
+    const filters = options.map(option => `${option.property}(${option.value}${option.unit})`).join(" ")
+    ctx.filter = filters
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+
+    canvas.toBlob((blob)=>{
+      const link = document.createElement("a")
+      link.href = URL.createObjectURL(blob)
+      link.download = "edited.png"
+      link.click()
+    },"image/png")
   }
 
   return (
     <>
       <nav>
         <h1>Beautify</h1>
-        <label className="upload-btn">
-          Upload
-          <input type="file" accept="image/*" onChange={handleUpload}/>
-        </label>
-        <button className="download-btn" onClick={handleDownload}>
-          Download
-        </button>
+        <div style={{marginRight: '10px'}}>
+          <label className="upload-btn">
+            Upload
+            <input type="file" accept="image/*" onChange={handleUpload}/>
+          </label>
+          <button className="download-btn" onClick={handleDownload}>
+            Download
+          </button>
+        </div>
       </nav>
       <div className="container">
-        {/* <div className="main-image" style={imageFilter()}/> */}
         <div className="main-image">
-        <img src={image} ref={imageRef} style={imageFilter()} className="image" alt="Upload Image"/>
+        {image ? (<img src={image} ref={imageRef} style={imageFilter()} className="image" alt="Upload Image"/>):(<h1>Upload Your image</h1>)}
         </div>
         <div className="sidebar-container">
           {options.map((option,index)=>(
