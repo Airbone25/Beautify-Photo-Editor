@@ -109,7 +109,7 @@ function App() {
     <>
       <nav>
         <h1>Beautify</h1>
-        <div style={{marginRight: '10px'}}>
+        <div style={{marginRight: '10px'}} className="btns">
           <label className="upload-btn">
             Upload
             <input type="file" accept="image/*" onChange={handleUpload}/>
